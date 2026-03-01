@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Village Cafe · PREMIUM SLOTS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: linear-gradient(145deg, #03100e, #0a2a24);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Arial Black', sans-serif;
+            padding: 16px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ANIMATED BACKGROUND */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: cyan;
+            border-radius: 50%;
+            box-shadow: 0 0 20px cyan;
+            animation: float 8s infinite linear;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        /* PARTY POPPER CANVAS */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .slot-machine {
+            background: rgba(4, 26, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 80px;
+            padding: 40px;
+            border: 4px solid #0ff;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.8), 0 0 80px #0ff, inset 0 0 30px rgba(0,255,255,0.3);
+            max-width: 850px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            animation: glowPulse 3s infinite;
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 30px 50px black, 0 0 50px #0ff, inset 0 0 30px cyan; }
+            50% { box-shadow: 0 30px 50px black, 0 0 100px #0ff, inset 0 0 50px cyan; }
+            100% { box-shadow: 0 30px 50px black, 0 0 50px #0ff, inset 0 0 30px cyan; }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 5rem;
+            background: linear-gradient(145deg, #0ff, #ffaa00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 40px cyan, 0 0 80px orange;
+            letter-spacing: 8px;
+            margin-bottom: 5px;
+            animation: titleShake 4s infinite;
+        }
+
+        @keyframes titleShake {
+            0%, 100% { transform: skew(0deg); }
+            5% { transform: skew(2deg); }
+            10% { transform: skew(-2deg); }
+            15% { transform: skew(0deg); }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #fff;
+            font-size: 1.4rem;
+            margin: 0 auto 20px;
+            padding: 12px 40px;
+            border: 2px solid #0ff;
+            border-radius: 60px;
+            width: fit-content;
+            background: linear-gradient(145deg, #0a2f28, #1a4f40);
+            box-shadow: 0 0 30px cyan;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .excited-text {
+            text-align: center;
+            color: #ffaa00;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px orange, 0 0 40px red;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* SLOT MACHINE HEADER */
+        .slot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+
+        .slot-light {
+            width: 30px;
+            height: 30px;
+            background: red;
+            border-radius: 50%;
+            box-shadow: 0 0 30px red;
+            animation: blink 1s infinite;
+        }
+
+        .slot-light:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        .slot-light:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; box-shadow: 0 0 40px red; }
+            50% { opacity: 0.3; box-shadow: 0 0 10px red; }
+        }
+
+        .slot-title {
+            color: #0ff;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 0 20px cyan;
+        }
+
+        /* MAIN SLOTS CONTAINER */
+        .slots-container {
+            background: linear-gradient(145deg, #0a2f28, #1a4a40);
+            border-radius: 60px;
+            padding: 50px 40px;
+            border: 4px solid #0ff;
+            margin-bottom: 30px;
+            box-shadow: inset 0 0 60px rgba(0,255,255,0.5), 0 20px 30px black;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slot-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,255,0.2) 0%, transparent 70%);
+            animation: rotate 10s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .slot-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 3D SLOT MACHINE STYLE */
+        .slot {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(145deg, #2a5a50, #1a4a40);
+            border: 6px solid #ffaa00;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: 900;
+            color: #ffaa00;
+            text-shadow: 0 0 30px orange, 0 0 60px red;
+            box-shadow: 0 15px 0 #0a2f28, 0 20px 30px black, inset 0 0 30px rgba(255,255,255,0.5);
+            position: relative;
+            transition: all 0.3s;
+            transform-style: preserve-3d;
+        }
+
+        .slot::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 35px;
+            background: linear-gradient(145deg, #0ff, #ffaa00);
+            opacity: 0.3;
+            z-index: -1;
+            filter: blur(10px);
+        }
+
+        .slot.rolling {
+            animation: slotRoll 0.2s infinite;
+            box-shadow: 0 10px 0 #0a2f28, 0 20px 30px black, inset 0 0 50px white;
+        }
+
+        @keyframes slotRoll {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(5deg); color: cyan; }
+            50% { transform: scale(1) rotate(0deg); color: #ffaa00; }
+            75% { transform: scale(1.1) rotate(-5deg); color: cyan; }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* PULL BUTTON */
+        .pull-btn {
+            background: linear-gradient(145deg, #0ff, #0099cc);
+            border: none;
+            color: #03100e;
+            font-size: 3.5rem;
+            font-weight: 900;
+            padding: 25px 60px;
+            border-radius: 80px;
+            cursor: pointer;
+            border: 6px solid white;
+            box-shadow: 0 15px 0 #006080, 0 0 60px cyan;
+            margin: 20px auto;
+            display: block;
+            width: fit-content;
+            transition: 0.1s;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pull-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 80%);
+            animation: btnGlow 2s infinite;
+        }
+
+        @keyframes btnGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .pull-btn:active {
+            transform: translateY(10px);
+            box-shadow: 0 8px 0 #006080, 0 0 60px cyan;
+        }
+
+        .pull-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+            transform: translateY(10px);
+            box-shadow: 0 8px 0 #006080;
+        }
+
+        /* RESULT BOX */
+        .result-box {
+            background: linear-gradient(145deg, #0a2f28, #1a4f40);
+            border-radius: 70px;
+            padding: 25px;
+            text-align: center;
+            font-size: 2rem;
+            color: #0ff;
+            border: 4px solid cyan;
+            margin: 20px 0;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s;
+            box-shadow: inset 0 0 40px rgba(0,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-box.win {
+            background: linear-gradient(145deg, #1a5f4a, #2a7a60);
+            color: yellow;
+            font-size: 2.3rem;
+            border-color: gold;
+            box-shadow: 0 0 100px gold, inset 0 0 60px orange;
+            animation: winPulse 1s infinite;
+        }
+
+        @keyframes winPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .result-sparkle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        /* CHART */
+        .chart {
+            background: linear-gradient(145deg, #0a2f28, #1a4f40);
+            border-radius: 60px;
+            padding: 30px;
+            border: 3px solid cyan;
+            margin: 20px 0;
+            box-shadow: inset 0 0 40px rgba(0,255,255,0.3);
+        }
+
+        .chart h3 {
+            color: #0ff;
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px cyan;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .chart-item {
+            background: linear-gradient(145deg, #115249, #1a6a5a);
+            padding: 20px;
+            border-radius: 40px;
+            text-align: center;
+            border: 3px solid #0ff;
+            box-shadow: 0 10px 0 #0a2f28, 0 0 30px cyan;
+            transition: 0.3s;
+        }
+
+        .chart-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 0 #0a2f28, 0 0 50px cyan;
+        }
+
+        .combo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: yellow;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px orange;
+        }
+
+        .prize {
+            color: #0ff;
+            font-size: 1.3rem;
+        }
+
+        /* STATS */
+        .stats {
+            background: linear-gradient(145deg, #0a2f28, #1a4f40);
+            border-radius: 70px;
+            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            border: 3px solid cyan;
+            margin-top: 20px;
+            box-shadow: inset 0 0 40px rgba(0,255,255,0.3);
+        }
+
+        .stat-item {
+            background: linear-gradient(145deg, #115249, #1a6a5a);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-align: center;
+            border: 2px solid #0ff;
+            box-shadow: 0 5px 0 #0a2f28, 0 0 30px cyan;
+            min-width: 140px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #0ff;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: yellow;
+            text-shadow: 0 0 20px orange;
+        }
+
+        .reset-btn {
+            background: linear-gradient(145deg, #166b5d, #1a8a78);
+            border: 3px solid cyan;
+            color: white;
+            padding: 15px 45px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #0a4a40, 0 0 40px cyan;
+            transition: 0.1s;
+        }
+
+        .reset-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 4px 0 #0a4a40, 0 0 40px cyan;
+        }
+
+        .footer {
+            text-align: center;
+            color: #0ff;
+            margin-top: 25px;
+            font-size: 1.2rem;
+            text-shadow: 0 0 20px cyan;
+            animation: footerGlow 2s infinite;
+        }
+
+        @keyframes footerGlow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; text-shadow: 0 0 40px cyan; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation" id="bgAnimation"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="slot-machine">
+        <h1>VILLAGE CAFE</h1>
+        <div class="subtitle">🎰 PREMIUM SLOT MACHINE 🎰</div>
+        <div class="excited-text">⚡ YOU CAN WIN EXCITING REWARDS FOR FREE! ⚡</div>
+
+        <!-- SLOT HEADER -->
+        <div class="slot-header">
+            <div class="slot-light"></div>
+            <div class="slot-title">🎰 JACKPOT ZONE 🎰</div>
+            <div class="slot-light"></div>
+        </div>
+
+        <!-- MAIN SLOTS -->
+        <div class="slots-container">
+            <div class="slot-glow"></div>
+            <div class="slot-row">
+                <div class="slot" id="slot1">7</div>
+                <div class="slot" id="slot2">7</div>
+                <div class="slot" id="slot3">7</div>
+            </div>
+        </div>
+
+        <!-- PULL BUTTON -->
+        <button class="pull-btn" id="pullBtn">🎰 PULL</button>
+
+        <!-- RESULT BOX -->
+        <div class="result-box" id="resultMsg">
+            🎲 PULL TO START 🎲
+            <div class="result-sparkle"></div>
+        </div>
+
+        <!-- PRIZE CHART - UPDATED -->
+        <div class="chart">
+            <h3>🏆 WINNING COMBINATIONS 🏆</h3>
+            <div class="chart-grid">
+                <div class="chart-item">
+                    <div class="combo">777</div>
+                    <div class="prize">🎨 COLORFUL PRINT</div>
+                    <div class="prize">(Premium Quality)</div>
+                </div>
+                <div class="chart-item">
+                    <div class="combo">333</div>
+                    <div class="prize">3 FREE PRINTOUTS</div>
+                </div>
+                <div class="chart-item">
+                    <div class="combo">VVV</div>
+                    <div class="prize">FREE RECHARGE</div>
+                    <div class="prize">(₹50)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATISTICS - UPDATED -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-label">TOTAL</div>
+                <div class="stat-number" id="total">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">COLOR PRINT</div>
+                <div class="stat-number" id="colorPrint">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">PRINTOUTS</div>
+                <div class="stat-number" id="prints">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">RECHARGE</div>
+                <div class="stat-number" id="recharge">0</div>
+            </div>
+            <button class="reset-btn" id="reset">↻ RESET</button>
+        </div>
+        <div class="footer">⚡ RANDOM 2% CHANCE · PARTY POPPER ON WIN ⚡</div>
+    </div>
+
+    <script>
+        (function() {
+            // BACKGROUND ANIMATION
+            function createBackgroundParticles() {
+                const bg = document.getElementById('bgAnimation');
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'bg-particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 8 + 's';
+                    particle.style.width = (Math.random() * 6 + 2) + 'px';
+                    particle.style.height = particle.style.width;
+                    bg.appendChild(particle);
+                }
+            }
+            createBackgroundParticles();
+
+            // ===== CONFIGURATION - UPDATED =====
+            const SYMBOLS = ['7', '3', 'V', 'X', 'O', 'Z', 'W', 'M', 'K', 'L'];
+            
+            const WINNINGS = {
+                '777': { type: 'colorPrint', name: 'COLOR PRINT', display: '🎉🎉 JACKPOT! YOU WON A COLORFUL PRINT! 🎉🎉' },
+                '333': { type: 'prints', name: 'PRINTOUTS', display: '🎉🎉 JACKPOT! YOU WON 3 FREE PRINTOUTS! 🎉🎉' },
+                'VVV': { type: 'recharge', name: 'RECHARGE', display: '🎉🎉 JACKPOT! YOU WON FREE RECHARGE ₹50! 🎉🎉' }
+            };
+
+            // ===== STATS - UPDATED =====
+            let stats = {
+                total: 0,
+                colorPrint: 0,
+                prints: 0,
+                recharge: 0
+            };
+
+            try {
+                const saved = localStorage.getItem('village_slots');
+                if (saved) stats = JSON.parse(saved);
+            } catch(e) {}
+
+            // ===== DOM - UPDATED =====
+            const slot1 = document.getElementById('slot1');
+            const slot2 = document.getElementById('slot2');
+            const slot3 = document.getElementById('slot3');
+            const pullBtn = document.getElementById('pullBtn');
+            const resultEl = document.getElementById('resultMsg');
+            const totalEl = document.getElementById('total');
+            const colorPrintEl = document.getElementById('colorPrint');
+            const printsEl = document.getElementById('prints');
+            const rechargeEl = document.getElementById('recharge');
+            const resetBtn = document.getElementById('reset');
+
+            // ===== STATE =====
+            let isRolling = false;
+
+            // ===== UPDATE STATS =====
+            function updateStats() {
+                totalEl.textContent = stats.total;
+                colorPrintEl.textContent = stats.colorPrint;
+                printsEl.textContent = stats.prints;
+                rechargeEl.textContent = stats.recharge;
+                localStorage.setItem('village_slots', JSON.stringify(stats));
+            }
+
+            // ===== GET RANDOM SYMBOL =====
+            function getRandomSymbol() {
+                return SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
+            }
+
+            // ===== TRUE 2% PROBABILITY =====
+            function getSpinResult() {
+                const r = Math.random() * 100;
+                
+                if (r < 2) return { symbols: ['7', '7', '7'], win: '777' };
+                if (r < 4) return { symbols: ['3', '3', '3'], win: '333' };
+                if (r < 6) return { symbols: ['V', 'V', 'V'], win: 'VVV' };
+                
+                let s1, s2, s3;
+                do {
+                    s1 = getRandomSymbol();
+                    s2 = getRandomSymbol();
+                    s3 = getRandomSymbol();
+                } while (
+                    (s1 === '7' && s2 === '7' && s3 === '7') ||
+                    (s1 === '3' && s2 === '3' && s3 === '3') ||
+                    (s1 === 'V' && s2 === 'V' && s3 === 'V')
+                );
+                
+                return { symbols: [s1, s2, s3], win: null };
+            }
+
+            // ===== PARTY POPPER EFFECT =====
+            function startPartyPopper() {
+                const canvas = document.getElementById('confetti-canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                const particles = [];
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500', '#ff69b4', '#0ff', '#ffaa00'];
+
+                for (let i = 0; i < 200; i++) {
+                    particles.push({
+                        x: canvas.width / 2,
+                        y: canvas.height / 2,
+                        vx: (Math.random() - 0.5) * 20,
+                        vy: (Math.random() - 0.5) * 20 - 8,
+                        size: Math.random() * 10 + 4,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        life: 1,
+                        rotation: Math.random() * 360
+                    });
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    let alive = false;
+                    
+                    for (let p of particles) {
+                        if (p.life <= 0) continue;
+                        
+                        alive = true;
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vy += 0.2;
+                        p.life -= 0.01;
+                        p.rotation += 5;
+                        
+                        ctx.save();
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate(p.rotation * Math.PI / 180);
+                        ctx.globalAlpha = p.life;
+                        ctx.fillStyle = p.color;
+                        ctx.shadowColor = p.color;
+                        ctx.shadowBlur = 10;
+                        ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                        ctx.restore();
+                    }
+                    
+                    ctx.globalAlpha = 1;
+                    
+                    if (alive) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    }
+                }
+
+                animate();
+            }
+
+            // ===== ROLLING ANIMATION =====
+            function rollSlots(finalSymbols) {
+                if (isRolling) return;
+
+                isRolling = true;
+                pullBtn.classList.add('disabled');
+                resultEl.classList.remove('win');
+                resultEl.innerHTML = '🎰 ROLLING... 🎰 <div class="result-sparkle"></div>';
+
+                slot1.classList.add('rolling');
+                slot2.classList.add('rolling');
+                slot3.classList.add('rolling');
+
+                let rolls = 0;
+                const maxRolls = 25;
+                
+                const interval = setInterval(() => {
+                    slot1.textContent = getRandomSymbol();
+                    slot2.textContent = getRandomSymbol();
+                    slot3.textContent = getRandomSymbol();
+                    rolls++;
+
+                    if (rolls >= maxRolls) {
+                        clearInterval(interval);
+                        
+                        slot1.textContent = finalSymbols[0];
+                        slot2.textContent = finalSymbols[1];
+                        slot3.textContent = finalSymbols[2];
+                        
+                        slot1.classList.remove('rolling');
+                        slot2.classList.remove('rolling');
+                        slot3.classList.remove('rolling');
+
+                        const combination = finalSymbols.join('');
+                        const win = WINNINGS[combination];
+                        
+                        stats.total++;
+                        
+                        if (win) {
+                            if (win.type === 'colorPrint') stats.colorPrint++;
+                            else if (win.type === 'prints') stats.prints++;
+                            else if (win.type === 'recharge') stats.recharge++;
+                            
+                            resultEl.innerHTML = win.display + ' <div class="result-sparkle"></div>';
+                            resultEl.classList.add('win');
+                            
+                            // PARTY POPPER ONLY ON WIN!
+                            startPartyPopper();
+                            
+                        } else {
+                            resultEl.innerHTML = '😓 BETTER LUCK NEXT TIME <div class="result-sparkle"></div>';
+                            resultEl.classList.remove('win');
+                        }
+                        
+                        updateStats();
+                        
+                        isRolling = false;
+                        pullBtn.classList.remove('disabled');
+                    }
+                }, 100);
+            }
+
+            // ===== PULL HANDLER =====
+            function pullLever() {
+                if (isRolling) return;
+                
+                const result = getSpinResult();
+                rollSlots(result.symbols);
+            }
+
+            // ===== RESET =====
+            function resetStats() {
+                if (confirm('Reset all counters?')) {
+                    stats = { total: 0, colorPrint: 0, prints: 0, recharge: 0 };
+                    updateStats();
+                    resultEl.innerHTML = '✨ STATS RESET ✨ <div class="result-sparkle"></div>';
+                    resultEl.classList.remove('win');
+                    
+                    slot1.textContent = '7';
+                    slot2.textContent = '7';
+                    slot3.textContent = '7';
+                }
+            }
+
+            // ===== INIT =====
+            updateStats();
+            
+            pullBtn.addEventListener('click', pullLever);
+            resetBtn.addEventListener('click', resetStats);
+
+            window.addEventListener('resize', () => {
+                const canvas = document.getElementById('confetti-canvas');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        })();
+    </script>
+</body>
+  </html>
