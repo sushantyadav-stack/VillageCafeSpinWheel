@@ -2,26 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Village Cafe · PREMIUM SLOTS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Village Cafe · ULTIMATE SLOTS</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: linear-gradient(145deg, #03100e, #0a2a24);
+            background: radial-gradient(circle at 50% 50%, #03100e, #0a2a24);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Segoe UI', 'Arial Black', sans-serif;
-            padding: 16px;
+            padding: 8px;
             position: relative;
-            overflow-x: hidden;
         }
 
         /* ANIMATED BACKGROUND */
@@ -62,14 +62,15 @@
             z-index: 9999;
         }
 
-        .slot-machine {
-            background: rgba(4, 26, 23, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 80px;
-            padding: 40px;
+        /* MAIN MACHINE */
+        .machine {
+            background: rgba(4, 26, 23, 0.98);
+            backdrop-filter: blur(5px);
+            border-radius: 40px;
+            padding: 20px 15px;
             border: 4px solid #0ff;
-            box-shadow: 0 30px 50px rgba(0,0,0,0.8), 0 0 80px #0ff, inset 0 0 30px rgba(0,255,255,0.3);
-            max-width: 850px;
+            box-shadow: 0 20px 30px black, 0 0 50px cyan, inset 0 0 30px rgba(0,255,255,0.3);
+            max-width: 450px;
             width: 100%;
             position: relative;
             z-index: 10;
@@ -77,105 +78,106 @@
         }
 
         @keyframes glowPulse {
-            0% { box-shadow: 0 30px 50px black, 0 0 50px #0ff, inset 0 0 30px cyan; }
-            50% { box-shadow: 0 30px 50px black, 0 0 100px #0ff, inset 0 0 50px cyan; }
-            100% { box-shadow: 0 30px 50px black, 0 0 50px #0ff, inset 0 0 30px cyan; }
+            0% { box-shadow: 0 20px 30px black, 0 0 30px cyan, inset 0 0 20px cyan; }
+            50% { box-shadow: 0 20px 30px black, 0 0 70px cyan, inset 0 0 40px cyan; }
+            100% { box-shadow: 0 20px 30px black, 0 0 30px cyan, inset 0 0 20px cyan; }
         }
 
+        /* TITLE */
         h1 {
             text-align: center;
-            font-size: 5rem;
+            font-size: 3.2rem;
             background: linear-gradient(145deg, #0ff, #ffaa00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 40px cyan, 0 0 80px orange;
-            letter-spacing: 8px;
-            margin-bottom: 5px;
+            text-shadow: 0 0 30px cyan, 0 0 50px orange;
+            letter-spacing: 3px;
+            margin-bottom: 2px;
             animation: titleShake 4s infinite;
         }
 
         @keyframes titleShake {
-            0%, 100% { transform: skew(0deg); }
-            5% { transform: skew(2deg); }
-            10% { transform: skew(-2deg); }
+            0%,100% { transform: skew(0deg); }
+            5% { transform: skew(1deg); }
+            10% { transform: skew(-1deg); }
             15% { transform: skew(0deg); }
         }
 
-        .subtitle {
+        .sub {
             text-align: center;
-            color: #fff;
-            font-size: 1.4rem;
-            margin: 0 auto 20px;
-            padding: 12px 40px;
-            border: 2px solid #0ff;
-            border-radius: 60px;
+            color: white;
+            font-size: 0.9rem;
+            background: #115249;
+            padding: 6px 20px;
+            border-radius: 40px;
             width: fit-content;
-            background: linear-gradient(145deg, #0a2f28, #1a4f40);
-            box-shadow: 0 0 30px cyan;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin: 0 auto 10px;
+            border: 2px solid cyan;
+            box-shadow: 0 0 20px cyan;
         }
 
-        .excited-text {
+        .excite {
             text-align: center;
             color: #ffaa00;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            text-shadow: 0 0 20px orange, 0 0 40px red;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            text-shadow: 0 0 15px orange, 0 0 30px red;
             animation: bounce 2s infinite;
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
-        /* SLOT MACHINE HEADER */
-        .slot-header {
+        /* SLOT HEADER */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding: 0 20px;
+            margin-bottom: 10px;
+            padding: 0 10px;
         }
 
-        .slot-light {
-            width: 30px;
-            height: 30px;
+        .light {
+            width: 20px;
+            height: 20px;
             background: red;
             border-radius: 50%;
-            box-shadow: 0 0 30px red;
+            box-shadow: 0 0 20px red;
             animation: blink 1s infinite;
         }
 
-        .slot-light:nth-child(2) {
-            animation-delay: 0.3s;
-        }
-        .slot-light:nth-child(3) {
-            animation-delay: 0.6s;
-        }
+        .light:nth-child(2) { animation-delay: 0.3s; }
+        .light:nth-child(3) { animation-delay: 0.6s; }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; box-shadow: 0 0 40px red; }
+            0%,100% { opacity: 1; box-shadow: 0 0 30px red; }
             50% { opacity: 0.3; box-shadow: 0 0 10px red; }
         }
 
-        .slot-title {
+        .header-text {
             color: #0ff;
-            font-size: 2rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            text-shadow: 0 0 20px cyan;
+            text-shadow: 0 0 15px cyan;
+            animation: headerPulse 2s infinite;
         }
 
-        /* MAIN SLOTS CONTAINER */
-        .slots-container {
-            background: linear-gradient(145deg, #0a2f28, #1a4a40);
-            border-radius: 60px;
-            padding: 50px 40px;
-            border: 4px solid #0ff;
-            margin-bottom: 30px;
-            box-shadow: inset 0 0 60px rgba(0,255,255,0.5), 0 20px 30px black;
+        @keyframes headerPulse {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* SLOTS CONTAINER */
+        .slots {
+            background: linear-gradient(145deg, #115249, #1a6a5a);
+            border-radius: 40px;
+            padding: 25px 15px;
+            border: 3px solid cyan;
+            margin-bottom: 15px;
+            box-shadow: inset 0 0 40px rgba(0,255,255,0.4), 0 10px 20px black;
             position: relative;
             overflow: hidden;
         }
@@ -196,92 +198,89 @@
             to { transform: rotate(360deg); }
         }
 
-        .slot-row {
+        .row {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin: 20px 0;
+            gap: 12px;
             position: relative;
             z-index: 2;
         }
 
-        /* 3D SLOT MACHINE STYLE */
+        /* SLOT BOXES */
         .slot {
-            width: 150px;
-            height: 150px;
+            width: 95px;
+            height: 95px;
             background: linear-gradient(145deg, #2a5a50, #1a4a40);
-            border: 6px solid #ffaa00;
-            border-radius: 30px;
+            border: 5px solid #ffaa00;
+            border-radius: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
+            font-size: 3.5rem;
             font-weight: 900;
             color: #ffaa00;
-            text-shadow: 0 0 30px orange, 0 0 60px red;
-            box-shadow: 0 15px 0 #0a2f28, 0 20px 30px black, inset 0 0 30px rgba(255,255,255,0.5);
+            text-shadow: 0 0 20px orange, 0 0 40px red;
+            box-shadow: 0 8px 0 #0a2f28, 0 10px 20px black, inset 0 0 20px rgba(255,255,255,0.5);
             position: relative;
-            transition: all 0.3s;
-            transform-style: preserve-3d;
         }
 
         .slot::before {
             content: '';
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 35px;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 30px;
             background: linear-gradient(145deg, #0ff, #ffaa00);
-            opacity: 0.3;
+            opacity: 0.2;
             z-index: -1;
-            filter: blur(10px);
+            filter: blur(8px);
         }
 
         .slot.rolling {
-            animation: slotRoll 0.2s infinite;
-            box-shadow: 0 10px 0 #0a2f28, 0 20px 30px black, inset 0 0 50px white;
+            animation: slotRoll 0.15s infinite;
         }
 
         @keyframes slotRoll {
-            0% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.1) rotate(5deg); color: cyan; }
+            0% { transform: scale(1) rotate(0deg); color: #ffaa00; }
+            25% { transform: scale(1.1) rotate(3deg); color: cyan; }
             50% { transform: scale(1) rotate(0deg); color: #ffaa00; }
-            75% { transform: scale(1.1) rotate(-5deg); color: cyan; }
-            100% { transform: scale(1) rotate(0deg); }
+            75% { transform: scale(1.1) rotate(-3deg); color: cyan; }
+            100% { transform: scale(1) rotate(0deg); color: #ffaa00; }
         }
 
         /* PULL BUTTON */
-        .pull-btn {
+        .pull {
             background: linear-gradient(145deg, #0ff, #0099cc);
             border: none;
             color: #03100e;
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             font-weight: 900;
-            padding: 25px 60px;
-            border-radius: 80px;
-            cursor: pointer;
-            border: 6px solid white;
-            box-shadow: 0 15px 0 #006080, 0 0 60px cyan;
-            margin: 20px auto;
+            padding: 15px 40px;
+            border-radius: 60px;
+            border: 5px solid white;
+            box-shadow: 0 10px 0 #006080, 0 0 60px cyan;
+            margin: 10px auto;
             display: block;
             width: fit-content;
-            transition: 0.1s;
+            cursor: pointer;
+            transition: 0.05s;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             position: relative;
             overflow: hidden;
+            touch-action: manipulation;
         }
 
-        .pull-btn::after {
+        .pull::after {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 80%);
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
             animation: btnGlow 2s infinite;
         }
 
@@ -290,49 +289,47 @@
             to { transform: rotate(360deg); }
         }
 
-        .pull-btn:active {
-            transform: translateY(10px);
-            box-shadow: 0 8px 0 #006080, 0 0 60px cyan;
+        .pull:active {
+            transform: translateY(6px);
+            box-shadow: 0 4px 0 #006080, 0 0 60px cyan;
         }
 
-        .pull-btn.disabled {
-            opacity: 0.3;
+        .pull.disabled {
+            opacity: 0.4;
             pointer-events: none;
-            transform: translateY(10px);
-            box-shadow: 0 8px 0 #006080;
+            transform: translateY(6px);
         }
 
         /* RESULT BOX */
-        .result-box {
-            background: linear-gradient(145deg, #0a2f28, #1a4f40);
-            border-radius: 70px;
-            padding: 25px;
+        .result {
+            background: linear-gradient(145deg, #115249, #1a6a5a);
+            border-radius: 40px;
+            padding: 15px;
             text-align: center;
-            font-size: 2rem;
-            color: #0ff;
-            border: 4px solid cyan;
-            margin: 20px 0;
-            min-height: 120px;
+            font-size: 1.3rem;
+            color: cyan;
+            border: 3px solid cyan;
+            margin: 15px 0;
+            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.5s;
-            box-shadow: inset 0 0 40px rgba(0,255,255,0.3);
+            font-weight: bold;
+            box-shadow: inset 0 0 30px rgba(0,255,255,0.3);
             position: relative;
             overflow: hidden;
         }
 
-        .result-box.win {
-            background: linear-gradient(145deg, #1a5f4a, #2a7a60);
+        .result.win {
+            background: linear-gradient(145deg, #1f6a4a, #2a7a60);
             color: yellow;
-            font-size: 2.3rem;
             border-color: gold;
-            box-shadow: 0 0 100px gold, inset 0 0 60px orange;
+            box-shadow: 0 0 60px gold, inset 0 0 40px orange;
             animation: winPulse 1s infinite;
         }
 
         @keyframes winPulse {
-            0%, 100% { transform: scale(1); }
+            0%,100% { transform: scale(1); }
             50% { transform: scale(1.02); }
         }
 
@@ -342,131 +339,137 @@
             height: 100%;
             background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
             animation: sparkle 2s infinite;
+            pointer-events: none;
         }
 
         @keyframes sparkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
+            0%,100% { opacity: 0.2; }
+            50% { opacity: 0.6; }
         }
 
         /* CHART */
         .chart {
-            background: linear-gradient(145deg, #0a2f28, #1a4f40);
-            border-radius: 60px;
-            padding: 30px;
-            border: 3px solid cyan;
-            margin: 20px 0;
-            box-shadow: inset 0 0 40px rgba(0,255,255,0.3);
+            background: linear-gradient(145deg, #115249, #1a6a5a);
+            border-radius: 30px;
+            padding: 15px;
+            border: 2px solid cyan;
+            margin: 15px 0;
+            box-shadow: inset 0 0 30px rgba(0,255,255,0.3);
         }
 
         .chart h3 {
-            color: #0ff;
+            color: cyan;
             text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-            text-shadow: 0 0 20px cyan;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            text-shadow: 0 0 15px cyan;
+            animation: chartGlow 2s infinite;
+        }
+
+        @keyframes chartGlow {
+            0%,100% { opacity: 0.9; }
+            50% { opacity: 1; text-shadow: 0 0 25px cyan; }
         }
 
         .chart-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 8px;
         }
 
         .chart-item {
-            background: linear-gradient(145deg, #115249, #1a6a5a);
-            padding: 20px;
-            border-radius: 40px;
+            background: linear-gradient(145deg, #1a6a5a, #115249);
+            padding: 10px 5px;
+            border-radius: 20px;
             text-align: center;
-            border: 3px solid #0ff;
-            box-shadow: 0 10px 0 #0a2f28, 0 0 30px cyan;
-            transition: 0.3s;
+            border: 2px solid cyan;
+            box-shadow: 0 5px 0 #0a2f28, 0 0 20px cyan;
+            transition: 0.2s;
         }
 
-        .chart-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 0 #0a2f28, 0 0 50px cyan;
+        .chart-item:active {
+            transform: scale(0.98);
         }
 
         .combo {
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: yellow;
-            margin-bottom: 10px;
-            text-shadow: 0 0 30px orange;
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px orange;
         }
 
         .prize {
-            color: #0ff;
-            font-size: 1.3rem;
+            color: white;
+            font-size: 0.9rem;
         }
 
         /* STATS */
         .stats {
-            background: linear-gradient(145deg, #0a2f28, #1a4f40);
-            border-radius: 70px;
-            padding: 30px;
+            background: linear-gradient(145deg, #115249, #1a6a5a);
+            border-radius: 30px;
+            padding: 15px;
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 8px;
             justify-content: center;
-            border: 3px solid cyan;
-            margin-top: 20px;
-            box-shadow: inset 0 0 40px rgba(0,255,255,0.3);
+            border: 2px solid cyan;
+            box-shadow: inset 0 0 30px rgba(0,255,255,0.3);
         }
 
         .stat-item {
-            background: linear-gradient(145deg, #115249, #1a6a5a);
-            padding: 15px 30px;
-            border-radius: 50px;
+            background: linear-gradient(145deg, #1a6a5a, #115249);
+            padding: 8px 12px;
+            border-radius: 30px;
             text-align: center;
-            border: 2px solid #0ff;
-            box-shadow: 0 5px 0 #0a2f28, 0 0 30px cyan;
-            min-width: 140px;
+            border: 2px solid cyan;
+            box-shadow: 0 3px 0 #0a2f28, 0 0 15px cyan;
+            min-width: 70px;
+            flex: 1 1 auto;
         }
 
         .stat-label {
-            font-size: 1rem;
-            color: #0ff;
+            font-size: 0.7rem;
+            color: cyan;
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 1.8rem;
             font-weight: 800;
             color: yellow;
-            text-shadow: 0 0 20px orange;
+            text-shadow: 0 0 10px orange;
         }
 
-        .reset-btn {
+        .reset {
             background: linear-gradient(145deg, #166b5d, #1a8a78);
-            border: 3px solid cyan;
+            border: 2px solid cyan;
             color: white;
-            padding: 15px 45px;
-            border-radius: 60px;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 1.1rem;
             font-weight: bold;
-            font-size: 1.4rem;
             cursor: pointer;
-            box-shadow: 0 8px 0 #0a4a40, 0 0 40px cyan;
-            transition: 0.1s;
+            box-shadow: 0 5px 0 #0a4a40, 0 0 25px cyan;
+            transition: 0.05s;
+            touch-action: manipulation;
         }
 
-        .reset-btn:active {
-            transform: translateY(5px);
-            box-shadow: 0 4px 0 #0a4a40, 0 0 40px cyan;
+        .reset:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #0a4a40, 0 0 25px cyan;
         }
 
         .footer {
             text-align: center;
-            color: #0ff;
-            margin-top: 25px;
-            font-size: 1.2rem;
-            text-shadow: 0 0 20px cyan;
+            color: cyan;
+            margin-top: 12px;
+            font-size: 0.9rem;
             animation: footerGlow 2s infinite;
         }
 
         @keyframes footerGlow {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; text-shadow: 0 0 40px cyan; }
+            0%,100% { opacity: 0.7; text-shadow: 0 0 10px cyan; }
+            50% { opacity: 1; text-shadow: 0 0 20px cyan; }
         }
     </style>
 </head>
@@ -474,22 +477,22 @@
     <div class="bg-animation" id="bgAnimation"></div>
     <canvas id="confetti-canvas"></canvas>
 
-    <div class="slot-machine">
+    <div class="machine">
         <h1>VILLAGE CAFE</h1>
-        <div class="subtitle">🎰 PREMIUM SLOT MACHINE 🎰</div>
-        <div class="excited-text">⚡ YOU CAN WIN EXCITING REWARDS FOR FREE! ⚡</div>
+        <div class="sub">🎰 ULTIMATE SLOT MACHINE 🎰</div>
+        <div class="excite">⚡ YOU CAN WIN EXCITING REWARDS FOR FREE! ⚡</div>
 
-        <!-- SLOT HEADER -->
-        <div class="slot-header">
-            <div class="slot-light"></div>
-            <div class="slot-title">🎰 JACKPOT ZONE 🎰</div>
-            <div class="slot-light"></div>
+        <!-- HEADER -->
+        <div class="header">
+            <div class="light"></div>
+            <div class="header-text">🎰 JACKPOT ZONE 🎰</div>
+            <div class="light"></div>
         </div>
 
-        <!-- MAIN SLOTS -->
-        <div class="slots-container">
+        <!-- SLOTS -->
+        <div class="slots">
             <div class="slot-glow"></div>
-            <div class="slot-row">
+            <div class="row">
                 <div class="slot" id="slot1">7</div>
                 <div class="slot" id="slot2">7</div>
                 <div class="slot" id="slot3">7</div>
@@ -497,15 +500,15 @@
         </div>
 
         <!-- PULL BUTTON -->
-        <button class="pull-btn" id="pullBtn">🎰 PULL</button>
+        <button class="pull" id="pullBtn">🎰 PULL</button>
 
-        <!-- RESULT BOX -->
-        <div class="result-box" id="resultMsg">
-            🎲 PULL TO START 🎲
+        <!-- RESULT -->
+        <div class="result" id="resultMsg">
+            ✨ PULL TO START ✨
             <div class="result-sparkle"></div>
         </div>
 
-        <!-- PRIZE CHART - UPDATED -->
+        <!-- CHART -->
         <div class="chart">
             <h3>🏆 WINNING COMBINATIONS 🏆</h3>
             <div class="chart-grid">
@@ -526,7 +529,7 @@
             </div>
         </div>
 
-        <!-- STATISTICS - UPDATED -->
+        <!-- STATS -->
         <div class="stats">
             <div class="stat-item">
                 <div class="stat-label">TOTAL</div>
@@ -544,38 +547,38 @@
                 <div class="stat-label">RECHARGE</div>
                 <div class="stat-number" id="recharge">0</div>
             </div>
-            <button class="reset-btn" id="reset">↻ RESET</button>
+            <button class="reset" id="resetBtn">↻ RESET</button>
         </div>
-        <div class="footer">⚡ RANDOM 2% CHANCE · PARTY POPPER ON WIN ⚡</div>
+        <div class="footer">⚡ 2% CHANCE PER PRIZE · PARTY POPPER ON WIN ⚡</div>
     </div>
 
     <script>
         (function() {
-            // BACKGROUND ANIMATION
+            // ===== BACKGROUND ANIMATION =====
             function createBackgroundParticles() {
                 const bg = document.getElementById('bgAnimation');
-                for (let i = 0; i < 50; i++) {
+                for (let i = 0; i < 30; i++) {
                     const particle = document.createElement('div');
                     particle.className = 'bg-particle';
                     particle.style.left = Math.random() * 100 + '%';
                     particle.style.animationDelay = Math.random() * 8 + 's';
-                    particle.style.width = (Math.random() * 6 + 2) + 'px';
+                    particle.style.width = (Math.random() * 5 + 2) + 'px';
                     particle.style.height = particle.style.width;
                     bg.appendChild(particle);
                 }
             }
             createBackgroundParticles();
 
-            // ===== CONFIGURATION - UPDATED =====
+            // ===== CONFIG =====
             const SYMBOLS = ['7', '3', 'V', 'X', 'O', 'Z', 'W', 'M', 'K', 'L'];
             
             const WINNINGS = {
-                '777': { type: 'colorPrint', name: 'COLOR PRINT', display: '🎉🎉 JACKPOT! YOU WON A COLORFUL PRINT! 🎉🎉' },
-                '333': { type: 'prints', name: 'PRINTOUTS', display: '🎉🎉 JACKPOT! YOU WON 3 FREE PRINTOUTS! 🎉🎉' },
-                'VVV': { type: 'recharge', name: 'RECHARGE', display: '🎉🎉 JACKPOT! YOU WON FREE RECHARGE ₹50! 🎉🎉' }
+                '777': { type: 'colorPrint', display: '🎉🎉 CONGRATULATIONS! YOU WON A COLORFUL PRINT! 🎉🎉' },
+                '333': { type: 'prints', display: '🎉🎉 CONGRATULATIONS! YOU WON 3 FREE PRINTOUTS! 🎉🎉' },
+                'VVV': { type: 'recharge', display: '🎉🎉 CONGRATULATIONS! YOU WON FREE RECHARGE ₹50! 🎉🎉' }
             };
 
-            // ===== STATS - UPDATED =====
+            // ===== STATS =====
             let stats = {
                 total: 0,
                 colorPrint: 0,
@@ -588,7 +591,7 @@
                 if (saved) stats = JSON.parse(saved);
             } catch(e) {}
 
-            // ===== DOM - UPDATED =====
+            // ===== DOM =====
             const slot1 = document.getElementById('slot1');
             const slot2 = document.getElementById('slot2');
             const slot3 = document.getElementById('slot3');
@@ -598,10 +601,13 @@
             const colorPrintEl = document.getElementById('colorPrint');
             const printsEl = document.getElementById('prints');
             const rechargeEl = document.getElementById('recharge');
-            const resetBtn = document.getElementById('reset');
+            const resetBtn = document.getElementById('resetBtn');
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
 
             // ===== STATE =====
-            let isRolling = false;
+            let isSpinning = false;
+            let spinInterval = null;
 
             // ===== UPDATE STATS =====
             function updateStats() {
@@ -617,7 +623,7 @@
                 return SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
             }
 
-            // ===== TRUE 2% PROBABILITY =====
+            // ===== 2% PROBABILITY =====
             function getSpinResult() {
                 const r = Math.random() * 100;
                 
@@ -639,10 +645,48 @@
                 return { symbols: [s1, s2, s3], win: null };
             }
 
-            // ===== PARTY POPPER EFFECT =====
+            // ===== PARTY POPPER WITH SOUND =====
+            function playWinSound() {
+                try {
+                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    
+                    // Celebration sound
+                    const oscillator = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+                    
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                    gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    
+                    oscillator.start();
+                    oscillator.stop(audioCtx.currentTime + 0.5);
+                    
+                    // Second note
+                    setTimeout(() => {
+                        const osc2 = audioCtx.createOscillator();
+                        const gain2 = audioCtx.createGain();
+                        osc2.type = 'sine';
+                        osc2.frequency.setValueAtTime(659.25, audioCtx.currentTime); // E5
+                        gain2.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                        gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                        
+                        osc2.connect(gain2);
+                        gain2.connect(audioCtx.destination);
+                        
+                        osc2.start();
+                        osc2.stop(audioCtx.currentTime + 0.5);
+                    }, 200);
+                } catch(e) {
+                    console.log('Audio not supported');
+                }
+            }
+
             function startPartyPopper() {
-                const canvas = document.getElementById('confetti-canvas');
-                const ctx = canvas.getContext('2d');
+                // Visual confetti
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
 
@@ -698,57 +742,61 @@
                 }
 
                 animate();
+                playWinSound(); // PARTY POPPER SOUND!
             }
 
-            // ===== ROLLING ANIMATION =====
-            function rollSlots(finalSymbols) {
-                if (isRolling) return;
+            // ===== SPIN FUNCTION =====
+            function spin() {
+                if (isSpinning) return;
 
-                isRolling = true;
+                const result = getSpinResult();
+                
+                isSpinning = true;
                 pullBtn.classList.add('disabled');
                 resultEl.classList.remove('win');
-                resultEl.innerHTML = '🎰 ROLLING... 🎰 <div class="result-sparkle"></div>';
-
+                resultEl.innerHTML = '🎰 SPINNING... 🎰 <div class="result-sparkle"></div>';
+                
                 slot1.classList.add('rolling');
                 slot2.classList.add('rolling');
                 slot3.classList.add('rolling');
 
-                let rolls = 0;
-                const maxRolls = 25;
+                let rollCount = 0;
+                const maxRolls = 20;
                 
-                const interval = setInterval(() => {
+                if (spinInterval) clearInterval(spinInterval);
+                
+                spinInterval = setInterval(() => {
                     slot1.textContent = getRandomSymbol();
                     slot2.textContent = getRandomSymbol();
                     slot3.textContent = getRandomSymbol();
-                    rolls++;
+                    rollCount++;
 
-                    if (rolls >= maxRolls) {
-                        clearInterval(interval);
+                    if (rollCount >= maxRolls) {
+                        clearInterval(spinInterval);
                         
-                        slot1.textContent = finalSymbols[0];
-                        slot2.textContent = finalSymbols[1];
-                        slot3.textContent = finalSymbols[2];
+                        slot1.textContent = result.symbols[0];
+                        slot2.textContent = result.symbols[1];
+                        slot3.textContent = result.symbols[2];
                         
                         slot1.classList.remove('rolling');
                         slot2.classList.remove('rolling');
                         slot3.classList.remove('rolling');
 
-                        const combination = finalSymbols.join('');
-                        const win = WINNINGS[combination];
-                        
                         stats.total++;
                         
-                        if (win) {
-                            if (win.type === 'colorPrint') stats.colorPrint++;
-                            else if (win.type === 'prints') stats.prints++;
-                            else if (win.type === 'recharge') stats.recharge++;
-                            
-                            resultEl.innerHTML = win.display + ' <div class="result-sparkle"></div>';
+                        if (result.win) {
+                            if (result.win === '777') {
+                                stats.colorPrint++;
+                                resultEl.innerHTML = WINNINGS['777'].display + ' <div class="result-sparkle"></div>';
+                            } else if (result.win === '333') {
+                                stats.prints++;
+                                resultEl.innerHTML = WINNINGS['333'].display + ' <div class="result-sparkle"></div>';
+                            } else if (result.win === 'VVV') {
+                                stats.recharge++;
+                                resultEl.innerHTML = WINNINGS['VVV'].display + ' <div class="result-sparkle"></div>';
+                            }
                             resultEl.classList.add('win');
-                            
-                            // PARTY POPPER ONLY ON WIN!
-                            startPartyPopper();
-                            
+                            startPartyPopper(); // PARTY POPPER WITH SOUND!
                         } else {
                             resultEl.innerHTML = '😓 BETTER LUCK NEXT TIME <div class="result-sparkle"></div>';
                             resultEl.classList.remove('win');
@@ -756,24 +804,21 @@
                         
                         updateStats();
                         
-                        isRolling = false;
+                        isSpinning = false;
                         pullBtn.classList.remove('disabled');
                     }
-                }, 100);
-            }
-
-            // ===== PULL HANDLER =====
-            function pullLever() {
-                if (isRolling) return;
-                
-                const result = getSpinResult();
-                rollSlots(result.symbols);
+                }, 80);
             }
 
             // ===== RESET =====
             function resetStats() {
-                if (confirm('Reset all counters?')) {
-                    stats = { total: 0, colorPrint: 0, prints: 0, recharge: 0 };
+                if (confirm('Reset all counters to zero?')) {
+                    stats = {
+                        total: 0,
+                        colorPrint: 0,
+                        prints: 0,
+                        recharge: 0
+                    };
                     updateStats();
                     resultEl.innerHTML = '✨ STATS RESET ✨ <div class="result-sparkle"></div>';
                     resultEl.classList.remove('win');
@@ -784,18 +829,28 @@
                 }
             }
 
-            // ===== INIT =====
-            updateStats();
-            
-            pullBtn.addEventListener('click', pullLever);
+            // ===== EVENT LISTENERS =====
+            pullBtn.addEventListener('click', spin);
             resetBtn.addEventListener('click', resetStats);
 
+            pullBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                spin();
+            });
+
+            resetBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                resetStats();
+            });
+
             window.addEventListener('resize', () => {
-                const canvas = document.getElementById('confetti-canvas');
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             });
+
+            // ===== INIT =====
+            updateStats();
         })();
     </script>
 </body>
-  </html>
+            </html>
